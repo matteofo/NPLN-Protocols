@@ -7,7 +7,6 @@ import "google/api/annotations.proto";
 import "google/api/field_behavior.proto";
 import "google/api/resource.proto";
 import "google/protobuf/duration.proto";
-import "google/protobuf/empty.proto";
 import "proto/auth/v1/resources.proto";
 import "proto/common/resources.proto";
 
@@ -49,36 +48,6 @@ message IssuePrearrangedUserTokenResponse {
 	Token token = 2;
 }
 
-message IssueAnonymousUserTokenRequest {
-	string tenant = 1;
-	ExternalIdToken external_id_token = 2;
-}
-
-message IssueAnonymousUserTokenResponse {
-	Token token = 1;
-}
-
-message RefreshAnonymousTokenRequest {
-	string tenant = 1;
-	string refresh_token = 2;
-}
-
-message RefreshAnonymousTokenResponse {
-	Token token = 1;
-}
-
-message ListUsersRequest {
-	string parent = 1;
-}
-
-message ListUsersResponse {
-	repeated User users = 1;
-}
-
-message DeleteUserRequest {
-	string name = 1;
-}
-
 message Token {
 	string user = 1;
 	string access_token = 2;
@@ -98,9 +67,4 @@ service Auth {
 	rpc IssueToken(IssueTokenRequest) returns (IssueTokenResponse);
 	rpc RefreshToken(RefreshTokenRequest) returns (RefreshTokenResponse);
 	rpc IssuePrearrangedUserToken(IssuePrearrangedUserTokenRequest) returns (IssuePrearrangedUserTokenResponse);
-	rpc IssueAnonymousUserToken(IssueAnonymousUserTokenRequest) returns (IssueAnonymousUserTokenResponse);
-	rpc RefreshAnonymousUserToken(RefreshAnonymousTokenRequest) returns (RefreshAnonymousTokenResponse);
-	// rpc ValidateToken;
-	rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
-	rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty);
 }
